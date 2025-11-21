@@ -53,9 +53,10 @@ PathT = TypeVar("PathT", list[str], str)
 
 
 Instance = TypeVar("Instance")
+Value = TypeVar("Value")
 
 
-class FieldDescriptor[Value]:
+class FieldDescriptor(Generic[Value]):
     """Descriptor for Anomalib's dataclass fields.
 
     Using a descriptor ensures that the values of dataclass fields can be
@@ -159,7 +160,7 @@ class FieldDescriptor[Value]:
 
 
 @dataclass
-class _InputFields(Generic[T, ImageT, MaskT, PathT], ABC):  # noqa: UP046
+class _InputFields(Generic[T, ImageT, MaskT, PathT], ABC):
     """Generic dataclass that defines the standard input fields for Anomalib.
 
     This abstract base class provides a structure for input data used in Anomalib.
@@ -257,7 +258,7 @@ class _InputFields(Generic[T, ImageT, MaskT, PathT], ABC):  # noqa: UP046
 
 
 @dataclass
-class _ImageInputFields(Generic[PathT], ABC):  # noqa: UP046
+class _ImageInputFields(Generic[PathT], ABC):
     """Generic dataclass for image-specific input fields in Anomalib.
 
     This class extends standard input fields with an ``image_path`` attribute for
@@ -294,7 +295,7 @@ class _ImageInputFields(Generic[PathT], ABC):  # noqa: UP046
 
 
 @dataclass
-class _VideoInputFields(Generic[T, ImageT, MaskT, PathT], ABC):  # noqa: UP046
+class _VideoInputFields(Generic[T, ImageT, MaskT, PathT], ABC):
     """Generic dataclass that defines the video input fields for Anomalib.
 
     This class extends standard input fields with attributes specific to
@@ -410,7 +411,7 @@ class _VideoInputFields(Generic[T, ImageT, MaskT, PathT], ABC):  # noqa: UP046
 
 
 @dataclass
-class _DepthInputFields(Generic[T, PathT], _ImageInputFields[PathT], ABC):  # noqa: UP046
+class _DepthInputFields(Generic[T, PathT], _ImageInputFields[PathT], ABC):
     """Generic dataclass that defines the depth input fields for Anomalib.
 
     This class extends standard input fields with depth-specific attributes for
@@ -472,7 +473,7 @@ class _DepthInputFields(Generic[T, PathT], _ImageInputFields[PathT], ABC):  # no
 
 
 @dataclass
-class _OutputFields(Generic[T, MaskT, PathT], ABC):  # noqa: UP046
+class _OutputFields(Generic[T, MaskT, PathT], ABC):
     """Generic dataclass that defines the standard output fields for Anomalib.
 
     This class defines the standard output fields used in Anomalib, including
@@ -639,7 +640,7 @@ class UpdateMixin:
 @dataclass
 class _GenericItem(
     UpdateMixin,
-    Generic[T, ImageT, MaskT, PathT],  # noqa: UP046
+    Generic[T, ImageT, MaskT, PathT],
     _OutputFields[T, MaskT, PathT],
     _InputFields[T, ImageT, MaskT, PathT],
 ):
@@ -668,7 +669,7 @@ class _GenericItem(
 @dataclass
 class _GenericBatch(
     UpdateMixin,
-    Generic[T, ImageT, MaskT, PathT],  # noqa: UP046
+    Generic[T, ImageT, MaskT, PathT],
     _OutputFields[T, MaskT, PathT],
     _InputFields[T, ImageT, MaskT, PathT],
 ):
@@ -695,7 +696,7 @@ ItemT = TypeVar("ItemT", bound="_GenericItem")
 
 
 @dataclass
-class BatchIterateMixin(Generic[ItemT]):  # noqa: UP046
+class BatchIterateMixin(Generic[ItemT]):
     """Mixin class for iterating over batches of items in Anomalib datasets.
 
     This class provides functionality to iterate over individual items within a

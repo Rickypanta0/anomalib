@@ -9,7 +9,7 @@ name = "anomalib"
 dynamic = ["version"]
 readme = "README.md"
 description = "anomalib - Anomaly Detection Library"
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 license = { file = "LICENSE" }
 authors = [{ name = "Intel OpenVINO" }]
 
@@ -18,6 +18,9 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Libraries",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
@@ -232,9 +235,6 @@ pytorch-triton-xpu = [
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # RUFF CONFIGURATION                                                          #
 [tool.ruff]
-# Enable preview features
-preview = true
-
 # Exclude a variety of commonly ignored directories.
 exclude = [
     ".bzr",
@@ -262,16 +262,15 @@ exclude = [
 # Same as Black.
 line-length = 120
 
-# Assume Python 3.13.
-target-version = "py313"
+# Assume Python 3.11.
+target-version = "py311"
 
 # Allow imports relative to the "src" and "tests" directories.
 src = ["src", "tests"]
 
 [tool.ruff.lint]
-
-# Allow unused variables when underscore-prefixed.
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+# Enable preview features
+preview = true
 
 # Enable rules
 select = [
@@ -327,7 +326,6 @@ select = [
 
 ignore = [
     # pydocstyle
-    "COM812",
     "D107", # Missing docstring in __init__
 
     # pylint
@@ -381,6 +379,10 @@ ignore = [
 # Allow autofix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
 unfixable = []
+
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.lint.mccabe]
 # Unlike Flake8, default to a complexity level of 10.

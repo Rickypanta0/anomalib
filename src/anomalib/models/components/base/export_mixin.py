@@ -177,6 +177,7 @@ class ExportMixin:
             f=str(onnx_path),
             opset_version=kwargs.pop("opset_version", 14),
             dynamic_axes=kwargs.pop("dynamic_axes", dynamic_axes),
+            dynamo=False,
             input_names=kwargs.pop("input_names", ["input"]),
             output_names=kwargs.pop("output_names", output_names),
             **kwargs,

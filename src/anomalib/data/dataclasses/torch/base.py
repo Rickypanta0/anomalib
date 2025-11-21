@@ -13,12 +13,14 @@ providing concrete implementations that use PyTorch tensors for tensor-like data
 
 from collections.abc import Callable
 from dataclasses import dataclass, fields
-from typing import Any, ClassVar, Generic, NamedTuple
+from typing import Any, ClassVar, Generic, NamedTuple, TypeVar
 
 import torch
 from torchvision.tv_tensors import Mask
 
 from anomalib.data.dataclasses.generic import ImageT, _GenericBatch, _GenericItem
+
+NumpyT = TypeVar("NumpyT")
 
 
 class InferenceBatch(NamedTuple):
@@ -42,7 +44,7 @@ class InferenceBatch(NamedTuple):
 
 
 @dataclass
-class ToNumpyMixin[NumpyT]:
+class ToNumpyMixin(Generic[NumpyT]):
     """Mixin for converting torch-based dataclasses to numpy.
 
     This mixin provides functionality to convert PyTorch tensor data to numpy
@@ -101,7 +103,7 @@ class ToNumpyMixin[NumpyT]:
 
 
 @dataclass
-class DatasetItem(Generic[ImageT], _GenericItem[torch.Tensor, ImageT, Mask, str]):  # noqa: UP046
+class DatasetItem(Generic[ImageT], _GenericItem[torch.Tensor, ImageT, Mask, str]):
     """Base dataclass for individual items in Anomalib datasets using PyTorch.
 
     This class extends the generic ``_GenericItem`` class to provide a
@@ -120,7 +122,7 @@ class DatasetItem(Generic[ImageT], _GenericItem[torch.Tensor, ImageT, Mask, str]
 
 
 @dataclass
-class Batch(Generic[ImageT], _GenericBatch[torch.Tensor, ImageT, Mask, list[str]]):  # noqa: UP046
+class Batch(Generic[ImageT], _GenericBatch[torch.Tensor, ImageT, Mask, list[str]]):
     """Base dataclass for batches of items in Anomalib datasets using PyTorch.
 
     This class extends the generic ``_GenericBatch`` class to provide a
