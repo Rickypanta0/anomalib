@@ -21,14 +21,14 @@ Example:
         ... )
 """
 
-from enum import StrEnum
+from enum import Enum
 
 from .avenue import Avenue
 from .shanghaitech import ShanghaiTech
 from .ucsd_ped import UCSDped
 
 
-class VideoDataFormat(StrEnum):
+class VideoDataFormat(str, Enum):
     """Supported Video Dataset Types.
 
     The following dataset formats are supported:

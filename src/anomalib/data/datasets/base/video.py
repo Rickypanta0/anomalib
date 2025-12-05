@@ -22,7 +22,7 @@ Example:
 
 from abc import ABC
 from collections.abc import Callable
-from enum import StrEnum
+from enum import Enum
 
 import torch
 from pandas import DataFrame
@@ -36,7 +36,7 @@ from anomalib.data.utils.video import ClipsIndexer
 from .image import AnomalibDataset
 
 
-class VideoTargetFrame(StrEnum):
+class VideoTargetFrame(str, Enum):
     """Target frame for a video-clip.
 
     Used in multi-frame models to determine which frame's ground truth information

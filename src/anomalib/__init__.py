@@ -32,12 +32,12 @@ Note:
     with a focus on reproducibility and ease of use.
 """
 
-from enum import StrEnum
+from enum import Enum
 
 __version__ = "2.3.0dev"
 
 
-class LearningType(StrEnum):
+class LearningType(str, Enum):
     """Learning type defining how the model learns from the dataset samples.
 
     This enum defines the different learning paradigms supported by anomalib models:
@@ -62,7 +62,7 @@ class LearningType(StrEnum):
     FEW_SHOT = "few_shot"
 
 
-class TaskType(StrEnum):
+class TaskType(str, Enum):
     """Task type defining the model's prediction output format.
 
     This enum defines the different task types supported by anomalib models:
@@ -88,7 +88,7 @@ class TaskType(StrEnum):
     SEGMENTATION = "segmentation"
 
 
-class PrecisionType(StrEnum):
+class PrecisionType(str, Enum):
     """Precision type defining the numerical precision used in model computations.
 
     This enum defines the different precision types supported by anomalib models:

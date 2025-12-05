@@ -22,11 +22,15 @@ The module ensures consistent typing across the codebase and provides helpful ty
 hints for configuration objects.
 """
 
+from typing import TypeAlias
+
 from lightning.pytorch import Callback
 from omegaconf import DictConfig, ListConfig
 
 from anomalib.metrics.threshold import Threshold
 from anomalib.utils.normalization import NormalizationMethod
 
-type NORMALIZATION = NormalizationMethod | DictConfig | Callback | str
-type THRESHOLD = Threshold | tuple[Threshold, Threshold] | DictConfig | ListConfig | list[dict[str, str | float]] | str
+NORMALIZATION: TypeAlias = NormalizationMethod | DictConfig | Callback | str
+THRESHOLD: TypeAlias = (
+    Threshold | tuple[Threshold, Threshold] | DictConfig | ListConfig | list[dict[str, str | float]] | str
+)

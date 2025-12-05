@@ -45,7 +45,7 @@ NumpyT = TypeVar("NumpyT")
 
 
 @dataclass
-class ToNumpyMixin(Generic[NumpyT]):  # noqa: UP046
+class ToNumpyMixin(Generic[NumpyT]):
     """Mixin for converting torch-based dataclasses to numpy.
 
     This mixin provides functionality to convert PyTorch tensor data to numpy
@@ -104,7 +104,7 @@ class ToNumpyMixin(Generic[NumpyT]):  # noqa: UP046
 
 
 @dataclass
-class DatasetItem(Generic[ImageT], _GenericItem[torch.Tensor, ImageT, Mask, str]):  # noqa: UP046
+class DatasetItem(Generic[ImageT], _GenericItem[torch.Tensor, ImageT, Mask, str]):
     """Base dataclass for individual items in Anomalib datasets using PyTorch.
 
     This class extends the generic ``_GenericItem`` class to provide a
@@ -123,7 +123,7 @@ class DatasetItem(Generic[ImageT], _GenericItem[torch.Tensor, ImageT, Mask, str]
 
 
 @dataclass
-class Batch(Generic[ImageT], _GenericBatch[torch.Tensor, ImageT, Mask, list[str]]):  # noqa: UP046
+class Batch(Generic[ImageT], _GenericBatch[torch.Tensor, ImageT, Mask, list[str]]):
     """Base dataclass for batches of items in Anomalib datasets using PyTorch.
 
     This class extends the generic ``_GenericBatch`` class to provide a

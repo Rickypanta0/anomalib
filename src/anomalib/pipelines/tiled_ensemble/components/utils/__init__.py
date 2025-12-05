@@ -20,10 +20,10 @@ Reference:
     on Computer Vision and Pattern Recognition Workshops (VAND 2.0). 2024.
 """
 
-from enum import Enum, StrEnum
+from enum import Enum
 
 
-class NormalizationStage(StrEnum):
+class NormalizationStage(str, Enum):
     """Enum signaling at which stage the normalization is done.
 
     In case of tile, tiles are normalized for each tile position separately.
@@ -36,7 +36,7 @@ class NormalizationStage(StrEnum):
     NONE = "none"
 
 
-class ThresholdingStage(StrEnum):
+class ThresholdingStage(str, Enum):
     """Enum signaling at which stage the thresholding is applied.
 
     In case of tile, thresholding is applied for each tile location separately.

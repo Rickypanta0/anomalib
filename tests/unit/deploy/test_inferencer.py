@@ -193,6 +193,6 @@ def test_inference_similarity(
     openvino_inferencer = OpenVINOInferencer(openvino_path, device="CPU")
     openvino_pred = openvino_inferencer.predict(test_image_path)
 
-    compare_predictions(engine_pred, torch_pred, tolerance=5e-3)
-    compare_predictions(engine_pred, openvino_pred, tolerance=5e-3)
-    compare_predictions(torch_pred, openvino_pred, tolerance=5e-3)
+    compare_predictions(engine_pred, torch_pred)
+    compare_predictions(engine_pred, openvino_pred)
+    compare_predictions(torch_pred, openvino_pred)

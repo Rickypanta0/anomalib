@@ -29,7 +29,7 @@ Reference:
 """
 
 from collections.abc import Sequence
-from enum import StrEnum
+from enum import Enum
 from pathlib import Path
 
 from pandas import DataFrame
@@ -40,7 +40,7 @@ from anomalib.data.errors import MisMatchError
 from anomalib.data.utils import Split, validate_path
 
 
-class TestType(StrEnum):
+class TestType(str, Enum):
     """Type of test set to use.
 
     The MVTec AD 2 dataset provides three different test sets:

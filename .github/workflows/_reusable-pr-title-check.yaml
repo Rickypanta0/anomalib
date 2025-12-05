@@ -24,7 +24,7 @@
 #    - Detailed feedback
 #
 # Required Inputs:
-# - python-version: Python version for validation (default: "3.13")
+# - python-version: Python version for validation (default: "3.10")
 #
 # Example Usage:
 # 1. Basic Validation:
@@ -37,7 +37,7 @@
 #      pr-title-check:
 #        uses: ./.github/workflows/_reusable-pr-title-check.yaml
 #        with:
-#          python-version: "3.13"
+#          python-version: "3.11"
 #
 # Note: Requires Commitizen configuration in pyproject.toml
 
@@ -49,7 +49,7 @@ on:
       python-version:
         description: "Python version for validation"
         type: string
-        default: "3.13"
+        default: "3.10"
 
 permissions:
   contents: read

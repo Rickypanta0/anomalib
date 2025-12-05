@@ -57,6 +57,8 @@ on:
     branches: ["main", "feature/**"]
   merge_group:
     branches: [main]
+  # MODIFICA 1: Aggiunto trigger manuale per debuggare senza PR
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -72,18 +74,21 @@ jobs:
     if: github.event_name == 'pull_request'
     uses: ./.github/workflows/_reusable-pr-title-check.yaml
     with:
-      python-version: "3.13"
+      python-version: "3.10"
 
   # Code quality job using reusable workflow
   quality:
     if: github.event.pull_request.draft != true
     uses: ./.github/workflows/_reusable-code-quality.yaml
     with:
-      python-version: "3.13"
+      python-version: "3.10"
 
   # Test suite job using reusable workflow
   unit-tests:
     if: github.event.pull_request.draft != true
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.13"]
     uses: ./.github/workflows/_reusable-test-suite.yaml
     with:
       test-type: "unit"
@@ -95,10 +100,14 @@ jobs:
 
   integration-tests:
     if: github.event.pull_request.draft != true
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.13"]
     uses: ./.github/workflows/_reusable-test-suite.yaml
     with:
       test-type: "integration"
-      runner: "self-hosted"
+      # MODIFICA 2: Cambiato da 'self-hosted' a 'ubuntu-latest' per funzionare sulla fork
+      runner: "ubuntu-latest"
       timeout: 60
       enable-cache: "false"
     secrets:

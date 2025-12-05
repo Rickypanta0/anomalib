@@ -329,6 +329,31 @@ class CustomHelpFormatter(RichHelpFormatter, DefaultHelpFormatter):
 
         super(RichHelpFormatter, self).add_usage(usage, actions, *args, **kwargs)
 
+    def _format_usage(self, usage: str | None, actions: list | tuple, groups: list, prefix: str | None) -> str:
+        """Format the usage line.
+
+        This method overrides the parent method to ensure compatibility between
+        RichHelpFormatter and DefaultHelpFormatter (from jsonargparse) on Python 3.13+.
+
+        Args:
+            usage: A string describing the usage of the program.
+            actions: A list or tuple of argparse.Action objects.
+            groups: A list of argparse groups.
+            prefix: The prefix string to use (e.g. 'usage: ').
+
+        Returns:
+            str: The formatted usage string.
+
+        Note:
+            RichHelpFormatter may pass actions as a tuple (e.g. actions=()), but
+            DefaultHelpFormatter expects a list and will raise an AttributeError
+            if a tuple is passed. This override converts tuples to lists before
+            delegating to the parent implementation.
+        """
+        if isinstance(actions, tuple):
+            actions = list(actions)
+        return super()._format_usage(usage, actions, groups, prefix)
+
     def add_argument(self, action: argparse.Action) -> None:
         """Add an argument to the help formatter.
 
