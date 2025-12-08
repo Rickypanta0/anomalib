@@ -365,7 +365,7 @@ class Engine:
         val_dataloaders: EVAL_DATALOADERS | None = None,
         datamodule: AnomalibDataModule | None = None,
         ckpt_path: str | Path | None = None,
-        **kwargs,
+        **kwargs,  # noqa: ARG002
     ) -> None:
         """Fit the model using the trainer.
 
@@ -398,8 +398,6 @@ class Engine:
         """
         if ckpt_path:
             ckpt_path = Path(ckpt_path).resolve()
-
-        kwargs.pop("weights_only", None)
 
         self._setup_workspace(
             model=model,
